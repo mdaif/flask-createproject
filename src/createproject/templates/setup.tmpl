@@ -1,0 +1,29 @@
+import setuptools
+
+with open('README.md', 'r', encoding='utf-8') as fh:
+    long_description = fh.read()
+
+setuptools.setup(
+    name='{{ project_name }}',
+    version='0.0.1',
+    author='{{ author_name }}',
+    author_email='{{ author_email }}',
+    description='{{ short_description }}',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
+    classifiers=[
+        'Programming Language :: Python :: 3',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
+    ],
+    package_dir={"": 'src'},
+    packages=setuptools.find_packages('src'),
+    python_requires='>=3.6',
+    install_requires=['Jinja2>=3.1.2'],
+    package_data={'': ['templates/*.txt']},
+    entry_points={
+        'console_scripts': [
+            # useful for running cli scripts (db migrations, shell, ... etc)
+        ],
+    },
+)
