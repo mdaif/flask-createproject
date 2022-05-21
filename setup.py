@@ -1,6 +1,5 @@
 import setuptools
 
-
 with open('README.md', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
 
@@ -19,7 +18,7 @@ setuptools.setup(
     ],
     package_dir={"": 'src'},
     packages=setuptools.find_packages('src'),
-    python_requires='>=3.6',
+    python_requires='>=3.9',
     install_requires=['Jinja2>=3.1.2', 'colored>=1.4.3', 'emoji>=1.7.0', 'halo>=0.0.31'],
     package_data={'': ['templates/*.txt']},
     entry_points={
