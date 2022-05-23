@@ -106,27 +106,29 @@ def run():
         loader=PackageLoader('createproject'),
         autoescape=select_autoescape()
     )
-    os.makedirs(os.path.join(base_path, setup_data['project_name'], 'src', setup_data['main_package']), exist_ok=False)
-    touch(os.path.join(base_path, setup_data['project_name'], 'src', setup_data['main_package'], '__init__.py'))
+    project_path = os.path.join(base_path, setup_data['project_name'])
+    main_pkg = os.path.join(project_path, 'src', setup_data['main_package'])
+    os.makedirs(main_pkg, exist_ok=False)
+    touch(os.path.join(main_pkg, '__init__.py'))
     if setup_data['include_templates']:
-        os.makedirs(
-            os.path.join(
-                base_path, setup_data['project_name'], 'src', setup_data['main_package'], 'templates'), exist_ok=False)
+        os.makedirs(os.path.join(main_pkg, 'templates'), exist_ok=False)
+        os.makedirs(os.path.join(main_pkg, 'templates', '__init__.py'), exist_ok=False)
     os.makedirs(os.path.join(base_path, setup_data['project_name'], 'tests'), exist_ok=False)
 
-    for filename, data in (
-        ('LICENSE', {}),
-        ('.gitignore', {}),
-        ('setup.py', setup_data),
-        ('setup.cfg', {}),
-        ('requirements.txt', {}),
-        ('README.md', {}),
-        ('pyproject.toml', {}),
-        ('MANIFEST.in', {'include_templates': setup_data['include_templates']}),
+    for filename, parent_dir, data in (
+        ('LICENSE', project_path, {}),
+        ('.gitignore', project_path, {}),
+        ('setup.py', project_path, setup_data),
+        ('setup.cfg', project_path, {}),
+        ('requirements.txt', project_path, {}),
+        ('README.md', project_path, {}),
+        ('pyproject.toml', project_path, {}),
+        ('MANIFEST.in', project_path, {'include_templates': setup_data['include_templates']}),
+        ('__init__.py', main_pkg, {'main_package': setup_data['main_package']}),
     ):
         template_file = env.get_template(f'{filename}.tmpl')
         rendered = template_file.render(**data)
-        with open(os.path.join(base_path, setup_data['project_name'], filename), 'w') as file:
+        with open(os.path.join(parent_dir, filename), 'w') as file:
             file.write(rendered)
 
     prompt_user('Everything is ready :sunglasses: enjoy coding !', wait_input=False)
