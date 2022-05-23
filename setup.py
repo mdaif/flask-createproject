@@ -4,8 +4,8 @@ with open('README.md', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='createproject-mdaif',
-    version='0.0.1',
+    name='flask-createproject',
+    version='0.0.2',
     author='Mohamed Daif',
     author_email='daif.control@gmail.com',
     description='A utility program to bootstrap flask projects',
