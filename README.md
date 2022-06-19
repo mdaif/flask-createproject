@@ -19,10 +19,12 @@ pip install flask-createproject
 
 # Usage
 
+You start by typing
 ```shell
 flask-createproject
 ```
-![](./media/demo.gif)
+Which will result in an interactive prompt that asks you a couple of questions and create the project
+with proper values for the `setup.py` file.
 
 # Development
 `pip-tools` is used for tracking the requirements and creating the development and release enviroments.
