@@ -119,6 +119,7 @@ def run():
         ('LICENSE', project_path, {}),
         ('.gitignore', project_path, {}),
         ('setup.py', project_path, setup_data),
+        ('config.py', project_path, {}),
         ('setup.cfg', project_path, {}),
         ('requirements.txt', project_path, {}),
         ('README.md', project_path, {}),
