@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 
 setuptools.setup(
     name='flask-createproject',
-    version='0.0.3',
+    version='0.0.4',
     author='Mohamed Daif',
     author_email='daif.control@gmail.com',
     description='A utility program to bootstrap flask projects',
@@ -19,7 +19,7 @@ setuptools.setup(
     package_dir={"": 'src'},
     packages=setuptools.find_packages('src'),
     python_requires='>=3.9',
-    install_requires=['Jinja2>=3.1.2', 'colored>=1.4.3', 'emoji>=1.7.0', 'halo>=0.0.31'],
+    install_requires=['Jinja2>=3.1.2', 'colored>=1.4.3', 'emoji>=1.7.0'],
     package_data={'': ['templates/*.txt']},
     entry_points={
         'console_scripts': [

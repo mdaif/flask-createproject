@@ -6,7 +6,6 @@ import time
 import emoji
 from colored import fg
 from colored import stylize
-from halo import Halo
 from jinja2 import Environment
 from jinja2 import PackageLoader
 from jinja2 import select_autoescape
@@ -41,7 +40,6 @@ def is_valid_email(user_input: str):
 
 def prompt_user(msg, color='green', wait_input=True, validator=None):
     if wait_input:
-        spinner = Halo(text='Loading', spinner='dots')
         print(stylize(emoji.emojize(msg, language='alias'), fg(color)))
 
         if validator:
@@ -49,9 +47,7 @@ def prompt_user(msg, color='green', wait_input=True, validator=None):
                 continue
         else:
             user_input = input().strip()
-        spinner.start()
         time.sleep(0.3)
-        spinner.stop()
         return user_input
     print(stylize(emoji.emojize(msg, language='alias'), fg(color)))
 
@@ -66,10 +62,9 @@ def aggregate_user_input(base_path: str):
         sys.exit(1)
     prompt_user('Good choice ! :thumbs_up:', 'blue', wait_input=False)
     main_package = prompt_user('What would you like to name the main package ?', validator=is_one_word)
-    author_name = prompt_user('Sorry ! I didn''t catch your name ?')
-    author_email = prompt_user('If someone needs to contact you, what would your email be ?', validator=is_valid_email)
-    prompt_user('You cannot get nice emails like that anymore :fire:', wait_input=False)
-    short_description = prompt_user('How would you shortly describe our new project ? :sunglasses:')
+    author_name = prompt_user('What would the author name be ?')
+    author_email = prompt_user('What would the author email be ?', validator=is_valid_email)
+    short_description = prompt_user('How would you shortly describe your new project ? :sunglasses:')
     include_templates = prompt_user(
         'Are you planning on having templates in your project ? (yes/no)', validator=is_valid_bool)
     include_templates = include_templates == 'yes'
